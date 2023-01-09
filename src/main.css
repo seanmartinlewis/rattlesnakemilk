@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "chopin";
+  src: url("./assets/fonts/ChopinScript.ttf") format("truetype");
+}
+@font-face {
+  font-family: "london";
+  src: url("./assets/fonts/OldLondon.ttf") format("truetype");
+}
+@font-face {
+  font-family: "cali";
+  src: url("./assets/fonts/CaliforniaSunshine.otf") format("truetype");
+}
+@font-face {
+  font-family: "ballantine";
+  src: url("./assets/fonts/ballantines_script_ef_bold.ttf") format("truetype");
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-image: url("/src/assets/images/ratmilk-bg.jpg");
+  height: 100vh;
+  margin: 0px;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
