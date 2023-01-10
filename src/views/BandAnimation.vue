@@ -12,7 +12,12 @@
         alt=""
       />
       <img
-        class="h-[50vh] band absolute z-50"
+        class="h-[80vh] text absolute top-0 z-0"
+        src="../assets/images/text.png"
+        alt=""
+      />
+      <img
+        class="h-[50vh] absolute z-10"
         src="../assets/images/ratmilk-band.png"
         alt=""
       />
@@ -26,7 +31,11 @@
 }
 
 .eyes {
-  animation: spin-reverse 15s linear infinite;
+  animation: spin-reverse 15s linear infinite, grow 10s linear infinite;
+}
+
+.text {
+  animation: spin 30s linear infinite, grow2 20s linear infinite;
 }
 
 @keyframes grow {
@@ -35,7 +44,17 @@
     scale: 1;
   }
   50% {
-    scale: 1.4;
+    scale: 0.8;
+  }
+}
+
+@keyframes grow2 {
+  0%,
+  100% {
+    scale: 0.8;
+  }
+  50% {
+    scale: 0.6;
   }
 }
 

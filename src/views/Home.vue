@@ -1,10 +1,10 @@
 <template>
   <div class="h-full w-full mt-[-75px]">
-    <TransitionGroup>
-      <BandAnimation v-if="!route.params.id" />
-    </TransitionGroup>
-    <Listen v-if="route.params.id === 'listen'" />
-    <Watch v-if="route.params.id === 'watch'" />
+    <Transition>
+      <BandAnimation />
+    </Transition>
+    <Listen v-show="route.params.id === 'listen'" />
+    <Watch v-show="route.params.id === 'watch'" />
   </div>
 </template>
 

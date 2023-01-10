@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Cardo&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,6 +18,10 @@
 @font-face {
   font-family: "ballantine";
   src: url("./assets/fonts/ballantines_script_ef_bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "ramona";
+  src: url("./assets/fonts/Ramona-light.ttf") format("truetype");
 }
 
 html,
