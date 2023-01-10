@@ -2,18 +2,26 @@
   <div
     class="w-full h-full absolute top-0 z-30 flex justify-center items-center"
   >
-    <div
-      class="w-[40vw] h-[50vh] bg-teal-300 bg-opacity-90 rounded-lg p-3 flex flex-col justify-around"
-    >
-      <div class="text-3xl text-white font-[cali] w-full text-center">
-        Contact
-      </div>
-      <form ref="form" @submit.prevent="sendEmail" class="flex flex-col">
-        <div class="mx-2">
-          <label for="name" class="block text-lg text-white font-medium"
-            >Name</label
-          >
-          <div class="mt-1">
+    <Transition>
+      <div
+        v-if="$route.params.id === 'contact'"
+        class="w-[80vh] h-[80vh] hover:scale-[1.02] transition ease-in-out duration-1000 bg-[#a4b4c6] font-[ramona] bg-opacity-30 rounded-full p-3 flex flex-col justify-around items-center"
+      >
+        <div
+          class="text-3xl text-white w-full font-[cali] text-center hover:scale-[1.06] transition ease-in-out duration-1000"
+          style="text-shadow: 2px 1px #675638"
+        >
+          BOOKING ~ CONTACT ~ INQUIRIES
+        </div>
+        <form
+          ref="form"
+          @submit.prevent="sendEmail"
+          class="flex flex-col w-4/5"
+        >
+          <div class="m-2">
+            <label for="name" class="block text-base text-white lowercase"
+              >Name</label
+            >
             <input
               type="text"
               name="user_name"
@@ -21,12 +29,10 @@
               placeholder="crockett"
             />
           </div>
-        </div>
-        <div class="mx-2">
-          <label for="email" class="block text-lg text-white font-medium"
-            >Email</label
-          >
-          <div class="mt-1">
+          <div class="m-2">
+            <label for="email" class="block text-base text-white lowercase"
+              >Email</label
+            >
             <input
               type="email"
               name="user_email"
@@ -34,12 +40,10 @@
               placeholder="you@example.com"
             />
           </div>
-        </div>
-        <div class="mx-2">
-          <label for="message" class="block text-lg text-white font-medium"
-            >Message</label
-          >
-          <div class="mt-1">
+          <div class="m-2">
+            <label for="message" class="block text-base text-white lowercase"
+              >Message</label
+            >
             <textarea
               rows="10"
               name="user_message"
@@ -47,17 +51,34 @@
               class="block w-full rounded-md shadow-sm sm:text-sm p-1"
             ></textarea>
           </div>
-        </div>
-        <input type="submit" value="Send" />
-      </form>
-      <button
-        class="p-2 bg-teal-700 hover:bg-teal-600 rounded-md text-white"
-        type="submit"
-        @click="sendEmail"
-      >
-        SEND
-      </button>
-    </div>
+          <div
+            class="w-full text-center text-white text-lg"
+            v-if="notification"
+          >
+            {{ notification }}
+          </div>
+        </form>
+        <button
+          class="p-2 font-[rajdhani] bg-orange-300 w-44 hover:scale-[1.1] transition ease-in-out duration-1000 hover:bg-blue-400 rounded-md text-white flex items-center justify-center"
+          type="submit"
+          @click="sendEmail"
+        >
+          <img
+            v-show="sending"
+            src="../assets/images/yingyang.png"
+            class="h-4 w-4 animate spin animate-spin relative right-2"
+            alt=""
+          />
+          SEND
+          <img
+            v-show="sending"
+            src="../assets/images/yingyang.png"
+            class="h-4 w-4 animate spin animate-spin relative left-2"
+            alt=""
+          />
+        </button>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -65,8 +86,16 @@
 import emailjs from "@emailjs/browser";
 
 export default {
+  data() {
+    return {
+      notification: null,
+      sending: false,
+    };
+  },
   methods: {
     sendEmail() {
+      this.$refs.sending = true;
+
       emailjs
         .sendForm(
           "service_0shh71l",
@@ -77,12 +106,32 @@ export default {
         .then(
           (result) => {
             console.log("SUCCESS!", result.text);
+            this.$refs.notification =
+              "Success!  Your message was sent.  Rattlesnake Milk will be in touch soon.";
+            this.$refs.sending = false;
           },
           (error) => {
             console.log("FAILED...", error.text);
+            this.$refs.notification =
+              "Success!  Your message was sent.  Rattlesnake Milk will be in touch soon.";
+            this.$refs.sending = false;
           }
         );
+      setTimeout(() => {
+        this.$refs.notification = null;
+      }, 4000);
     },
   },
 };
 </script>
+<style scoped lang="css">
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
