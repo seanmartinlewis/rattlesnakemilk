@@ -5,6 +5,7 @@
     </Transition>
     <Listen v-show="route.params.id === 'listen'" />
     <Watch v-show="route.params.id === 'watch'" />
+    <Contact v-show="route.params.id === 'contact'" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import { useRoute } from "vue-router";
 import BandAnimation from "./BandAnimation.vue";
 import Listen from "./Listen.vue";
 import Watch from "./Watch.vue";
+import Contact from "./Contact.vue";
 
 const route = useRoute();
 onMounted(() => {

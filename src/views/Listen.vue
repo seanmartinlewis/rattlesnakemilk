@@ -54,7 +54,7 @@ const route = useRoute();
 <style scoped lang="css">
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 1.5s ease;
+  transition: opacity 2s ease;
 }
 
 .v-enter-from,
