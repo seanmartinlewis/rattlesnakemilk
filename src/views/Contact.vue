@@ -4,7 +4,7 @@
   >
     <Transition>
       <div
-        v-if="$route.params.id === 'contact'"
+        v-if="$route.params.id === 'contact' && show === true"
         class="w-[80vh] h-[80vh] hover:scale-[1.02] transition ease-in-out duration-1000 bg-[#a4b4c6] font-[ramona] bg-opacity-30 rounded-full p-3 flex flex-col justify-around items-center"
       >
         <div
@@ -52,7 +52,8 @@
             ></textarea>
           </div>
           <div
-            class="w-full text-center text-white text-lg"
+            class="w-full text-center text-white text-base"
+            style="text-shadow: 2px 1px #675638"
             v-if="notification"
           >
             {{ notification }}
@@ -88,13 +89,14 @@ import emailjs from "@emailjs/browser";
 export default {
   data() {
     return {
-      notification: null,
+      notification: "",
       sending: false,
+      show: true,
     };
   },
   methods: {
     sendEmail() {
-      this.$refs.sending = true;
+      this.sending = true;
 
       emailjs
         .sendForm(
@@ -106,19 +108,23 @@ export default {
         .then(
           (result) => {
             console.log("SUCCESS!", result.text);
-            this.$refs.notification =
+            this.notification =
               "Success!  Your message was sent.  Rattlesnake Milk will be in touch soon.";
-            this.$refs.sending = false;
+            this.sending = false;
           },
           (error) => {
             console.log("FAILED...", error.text);
-            this.$refs.notification =
+            this.notification =
               "Success!  Your message was sent.  Rattlesnake Milk will be in touch soon.";
-            this.$refs.sending = false;
+            this.sending = false;
           }
         );
       setTimeout(() => {
-        this.$refs.notification = null;
+        this.notification = "";
+        this.show = false;
+        setTimeout(() => {
+          this.show = true;
+        }, 10000);
       }, 4000);
     },
   },
